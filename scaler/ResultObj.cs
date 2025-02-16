@@ -6,7 +6,7 @@ abstract class ResultBase
 {
     public ResultBase()
     {
-        Console.WriteLine(this.GetType().Name+ " Create");
+        Console.WriteLine(this.GetType().Name + " Create");
     }
 
     public virtual void Dispose()
@@ -32,12 +32,12 @@ class ResultTest : ResultBase
     }
 
     public override void Save(SKBitmap bmp)
-    {   
+    {
         FileStream fs = new FileStream("ResultTest.bmp", FileMode.Create, FileAccess.ReadWrite);
         //StreamWriter sw = new StreamWriter(fs);
         //SKWStream sw = new()        
         bmp.Encode(fs, SKEncodedImageFormat.Bmp, 0);
-         
+
     }
 
 }

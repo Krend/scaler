@@ -14,15 +14,15 @@ st.Dispose();
 SKBitmap bmp = new SKBitmap(20, 20, false);
 SKColor red = new SKColor(0xFF, 0x00, 0x00);
 
-for (int x = 0; x < bmp.Width -1; x++)
+for (int x = 0; x < bmp.Width - 1; x++)
 {
-    for (int y = 0; y < bmp.Height -1; y++)
+    for (int y = 0; y < bmp.Height - 1; y++)
     {
         bmp.SetPixel(x, y, red);
     }
 }
 
-foreach (SKEncodedImageFormat imf in (SKEncodedImageFormat[]) Enum.GetValues(typeof(SKEncodedImageFormat)) )
+foreach (SKEncodedImageFormat imf in (SKEncodedImageFormat[])Enum.GetValues(typeof(SKEncodedImageFormat)))
 {
     string filename = "dump/ResultTest." + imf.ToString();
     FileStream fs;
@@ -32,7 +32,7 @@ foreach (SKEncodedImageFormat imf in (SKEncodedImageFormat[]) Enum.GetValues(typ
     }
     catch (Exception e)
     {
-        Console.WriteLine("File access error; Operation: Create; Exception: "+e.Message);
+        Console.WriteLine("File access error; Operation: Create; Exception: " + e.Message);
         continue;
     }
 
@@ -40,13 +40,13 @@ foreach (SKEncodedImageFormat imf in (SKEncodedImageFormat[]) Enum.GetValues(typ
 
     using (fs)
     {
-        using (SKManagedWStream wstream  = new SKManagedWStream(fs))
+        using (SKManagedWStream wstream = new SKManagedWStream(fs))
         {
 
-            b= bmp.Encode(wstream, imf, 100);
+            b = bmp.Encode(wstream, imf, 100);
         }
     }
-    
+
     if (b)
     {
         Console.WriteLine("Success " + imf.ToString());
@@ -58,12 +58,12 @@ foreach (SKEncodedImageFormat imf in (SKEncodedImageFormat[]) Enum.GetValues(typ
         {
             File.Delete(filename);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
-            Console.WriteLine("File access error; Operation: Delete; Exception: "+e.Message);
+            Console.WriteLine("File access error; Operation: Delete; Exception: " + e.Message);
             continue;
         }
     }
- }
+}
 
 bmp.Dispose();
