@@ -27,3 +27,4 @@
 /home/zoltan/Documents/prog/c#/scaler/scaler/obj/Debug/net8.0/scaler.pdb
 /home/zoltan/Documents/prog/c#/scaler/scaler/obj/Debug/net8.0/scaler.genruntimeconfig.cache
 /home/zoltan/Documents/prog/c#/scaler/scaler/obj/Debug/net8.0/ref/scaler.dll
+/home/zoltan/Documents/prog/c#/scaler/scaler/obj/Debug/net8.0/scaler.sourcelink.json

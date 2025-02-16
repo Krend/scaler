@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("scaler")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94289bced132057a576014cb600df36c14c74da5")]
 [assembly: System.Reflection.AssemblyProductAttribute("scaler")]
 [assembly: System.Reflection.AssemblyTitleAttribute("scaler")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
