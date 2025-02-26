@@ -10,7 +10,7 @@ public abstract class ScaleBase
     protected ResultBase rb;
 
     protected bool DestroyOwnObjects;
-    public ScaleBase(SourceBase? sb, ResultBase? rb, bool DestroyOwnObjects = true)
+    public ScaleBase(SourceBase sb, ResultBase rb, bool DestroyOwnObjects = true)
     {
         Console.WriteLine(this.GetType().Name + " Create");
 
@@ -33,20 +33,26 @@ public abstract class ScaleBase
         Console.WriteLine(this.GetType().Name + " Destroy");
     }
 
-    public abstract SKBitmap ScaleFunc(SKBitmap bmp);
+    public abstract SKBitmap? ScaleFunc(SKBitmap bmp);
 
-    public void Scale()
+    public int Scale()
     {
-        using SKBitmap bmp = sb.Pass();
-        using SKBitmap bmp2 = ScaleFunc(bmp);
-        rb.Save(bmp2);
+        using SKBitmap? bmp = sb.Pass();
+        if (null == bmp)
+            return 0;
+
+        using SKBitmap? bmp2 = ScaleFunc(bmp);
+        if (null == bmp2)
+            return 0;
+
+        return rb.Save(bmp2);        
     }
 
 }
 
 public class ScaleTest : ScaleBase
 {
-    public ScaleTest(SourceBase? sb, ResultBase? rb, bool DestroyOwnObjects = true) : base(sb, rb, DestroyOwnObjects)
+    public ScaleTest(SourceBase sb, ResultBase rb, bool DestroyOwnObjects = true) : base(sb, rb, DestroyOwnObjects)
     {
 
     }
@@ -57,10 +63,12 @@ public class ScaleTest : ScaleBase
         base.Dispose();
     }
 
-    public override SKBitmap ScaleFunc(SKBitmap bmp)
+    public override SKBitmap? ScaleFunc(SKBitmap bmp)
     {
-        //return new SKBitmap(bmp, new Size(bmp.Width * 2 , bmp.Height * 2));
-        return new SKBitmap(bmp.Width * 2, bmp.Height * 2);
+        SKBitmap resbmp = new SKBitmap();
+        bmp.CopyTo(resbmp);
+        return resbmp;
+
     }
 
 }

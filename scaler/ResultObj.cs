@@ -15,7 +15,7 @@ public abstract class ResultBase
         Console.WriteLine(this.GetType().Name + " Destroy");
     }
 
-    public abstract void Save(SKBitmap bmp);
+    public abstract int Save(SKBitmap bmp);
 }
 
 
@@ -32,9 +32,9 @@ public class ResultTest : ResultBase
         base.Dispose();
     }
 
-    public override void Save(SKBitmap bmp)
+    public override int Save(SKBitmap bmp)
     {
-        CU.SaveToFile("ResultTest.png", bmp, SKEncodedImageFormat.Png);
+        return  CU.SaveToFile("ResultTest.png", bmp, SKEncodedImageFormat.Png);
     }
 
 }

@@ -15,7 +15,7 @@ public abstract class SourceBase
         Console.WriteLine(this.GetType().Name + " Destroy");
     }
 
-    public abstract SKBitmap Pass();
+    public abstract SKBitmap? Pass();
 
 }
 
@@ -32,11 +32,16 @@ public class SourceTest : SourceBase
         base.Dispose();
     }
 
-    public override SKBitmap Pass()
+    public override SKBitmap? Pass()
     {
         SKBitmap bmp = new SKBitmap(20, 20, false);
 
-
+        using (SKCanvas canvas = new SKCanvas(bmp))
+        {
+            SKColor red = new SKColor(0xFF, 0x00, 0x00);
+            canvas.Clear(red);
+        }
+        
         return bmp;
     }
 }
