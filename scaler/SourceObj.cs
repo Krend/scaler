@@ -2,7 +2,7 @@ using SkiaSharp;
 
 namespace SourceObj;
 
-abstract class SourceBase
+public abstract class SourceBase
 {
 
     public SourceBase()
@@ -19,7 +19,7 @@ abstract class SourceBase
 
 }
 
-class SourceTest : SourceBase
+public class SourceTest : SourceBase
 {
     public SourceTest() : base()
     {

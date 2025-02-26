@@ -1,8 +1,9 @@
 using SkiaSharp;
+using CommonUtility;
 
 namespace ResultObj;
 
-abstract class ResultBase
+public abstract class ResultBase
 {
     public ResultBase()
     {
@@ -18,7 +19,7 @@ abstract class ResultBase
 }
 
 
-class ResultTest : ResultBase
+public class ResultTest : ResultBase
 {
     public ResultTest() : base()
     {
@@ -33,11 +34,7 @@ class ResultTest : ResultBase
 
     public override void Save(SKBitmap bmp)
     {
-        FileStream fs = new FileStream("ResultTest.bmp", FileMode.Create, FileAccess.ReadWrite);
-        //StreamWriter sw = new StreamWriter(fs);
-        //SKWStream sw = new()        
-        bmp.Encode(fs, SKEncodedImageFormat.Bmp, 0);
-
+        CU.SaveToFile("ResultTest.png", bmp, SKEncodedImageFormat.Png);
     }
 
 }

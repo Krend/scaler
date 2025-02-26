@@ -4,22 +4,32 @@ using ResultObj;
 
 namespace ScaleObj;
 
-abstract class ScaleBase
+public abstract class ScaleBase
 {
     protected SourceBase sb;
     protected ResultBase rb;
-    public ScaleBase(SourceBase sb, ResultBase rb)
+
+    protected bool DestroyOwnObjects;
+    public ScaleBase(SourceBase? sb, ResultBase? rb, bool DestroyOwnObjects = true)
     {
         Console.WriteLine(this.GetType().Name + " Create");
+
+        ArgumentNullException.ThrowIfNull(sb, "Unassigned Sourcebase");
+        ArgumentNullException.ThrowIfNull(rb, "Unassigned ResultBase");
+
         this.sb = sb;
         this.rb = rb;
+        this.DestroyOwnObjects = DestroyOwnObjects;
 
     }
 
     public virtual void Dispose()
     {
-        sb.Dispose();
-        rb.Dispose();
+        if (DestroyOwnObjects)
+        {
+            sb.Dispose();
+            rb.Dispose();
+        }
         Console.WriteLine(this.GetType().Name + " Destroy");
     }
 
@@ -27,32 +37,16 @@ abstract class ScaleBase
 
     public void Scale()
     {
-        SKBitmap bmp = sb.Pass();
-
-        try
-        {
-            SKBitmap bmp2 = ScaleFunc(bmp);
-            try
-            {
-                rb.Save(bmp2);
-            }
-            finally
-            {
-                bmp2.Dispose();
-            }
-
-        }
-        finally
-        {
-            bmp.Dispose();
-        }
+        using SKBitmap bmp = sb.Pass();
+        using SKBitmap bmp2 = ScaleFunc(bmp);
+        rb.Save(bmp2);
     }
 
 }
 
-class ScaleTest : ScaleBase
+public class ScaleTest : ScaleBase
 {
-    public ScaleTest(SourceBase sb, ResultBase rb) : base(sb, rb)
+    public ScaleTest(SourceBase? sb, ResultBase? rb, bool DestroyOwnObjects = true) : base(sb, rb, DestroyOwnObjects)
     {
 
     }
