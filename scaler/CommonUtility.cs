@@ -14,36 +14,23 @@ static class CU
     /// </summary>
     public static int SaveToFile(string filename, SKBitmap bmp, SKEncodedImageFormat imf)
     {
-        bool valid;
+        using SKData data = bmp.Encode(imf, 100);
+        if (null == data)
+        {
+            Console.WriteLine("Failed to Encode " + imf.ToString());
+            return 0;
+        }
+        
         try
         {
             using FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
-            using SKManagedWStream wstream = new SKManagedWStream(fs);
-            valid = bmp.Encode(wstream, imf, 100);
+            data.SaveTo(fs);
+            Console.WriteLine("Success " + imf.ToString());
         }
         catch (Exception e)
         {
             Console.WriteLine("File access error; Operation: Create/Write; Exception: " + e.Message);
             return -1;
-        }
-
-        if (valid)
-        {
-            Console.WriteLine("Success " + imf.ToString());
-        }
-        else
-        {
-            Console.WriteLine("Fail " + imf.ToString());
-            try
-            {
-                File.Delete(filename);
-                return 0;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("File access error; Operation: Delete; Exception: " + e.Message);
-                return -2;
-            }
         }
 
         return 1;
