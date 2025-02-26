@@ -17,19 +17,19 @@ static class CU
         using SKData data = bmp.Encode(imf, 100);
         if (null == data)
         {
-            Console.WriteLine("Failed to Encode " + imf.ToString());
+            Console.WriteLine("Failed to Encode " + filename + " format" + imf.ToString());
             return 0;
         }
-        
+
         try
         {
             using FileStream fs = new FileStream(filename, FileMode.Create, FileAccess.Write);
             data.SaveTo(fs);
-            Console.WriteLine("Success " + imf.ToString());
+            Console.WriteLine("Success " + filename + " format" + imf.ToString());
         }
         catch (Exception e)
         {
-            Console.WriteLine("File access error; Operation: Create/Write; Exception: " + e.Message);
+            Console.WriteLine("File access error; Filename: " + filename + " format" + imf.ToString() + " Operation: Create/Write; Exception: " + e.Message);
             return -1;
         }
 
