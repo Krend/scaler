@@ -19,6 +19,29 @@ public class ScaleFuncCopy : IScaleFunc
     }
 }
 
+public class ScaleFuncSkiaResize : IScaleFunc
+{
+    protected float scaleRatio;
+    public ScaleFuncSkiaResize(float scaleRatio)
+    {
+        this.scaleRatio = scaleRatio;
+    }
+
+    protected SKSizeI CalcNewSize(SKSizeI size)
+    {
+        return new SKSizeI(
+            (int)Math.Floor((size.Width * scaleRatio)),
+            (int)Math.Floor((size.Height * scaleRatio))
+        );
+    }
+    public SKBitmap? Scale(SKBitmap bmp)
+    {
+        SKSizeI newsize = CalcNewSize(bmp.Info.Size);
+        SKSamplingOptions so = new SKSamplingOptions(SKFilterMode.Linear);
+        return bmp.Resize(newsize, so);
+    }
+}
+
 public class ScaleBase
 {
     private readonly SourceBase _sb;
