@@ -1,8 +1,6 @@
 using SkiaSharp;
-using SourceObj;
-using ResultObj;
 
-namespace ScaleObj;
+namespace Scale;
 
 public interface IScaleFunc
 {

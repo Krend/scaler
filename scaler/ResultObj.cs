@@ -1,7 +1,6 @@
 using SkiaSharp;
-using CommonUtility;
 
-namespace ResultObj;
+namespace Scale;
 
 public abstract class ResultBase
 {
@@ -22,7 +21,7 @@ public class ResultTest : ResultBase
 
     public override int Save(SKBitmap bmp)
     {
-        return  CU.SaveToFile("ResultTest.png", bmp, SKEncodedImageFormat.Png);
+        return  CommonUtility.SaveToFile("ResultTest.png", bmp, SKEncodedImageFormat.Png);
     }
 
 }

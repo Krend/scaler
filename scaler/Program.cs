@@ -1,16 +1,12 @@
-﻿using ResultObj;
-using ScaleObj;
-using SourceObj;
+﻿using Scale;
 using SkiaSharp;
-using CommonUtility;
 
-ScaleTest st = new ScaleTest(new SourceTest(), new ResultTest());
+//ScaleTest st = new ScaleTest(new SourceTest(), new ResultTest());
+//ScaleBase st = new ScaleBase(new SourceTest(), new ResultTest(), new ScaleFuncCopy());
+ScaleBase st = new ScaleBase(new SourceTest(), new ResultTest(), new ScaleFuncSkiaResize(11.94f));
 
-Console.WriteLine();
+st.Scale();
 
-//st.Scale();
-
-st.Dispose();
 
 SKBitmap bmp = new SKBitmap(20, 20, false);
 SKColor red = new SKColor(0xFF, 0x00, 0x00);

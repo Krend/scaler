@@ -1,8 +1,8 @@
 using SkiaSharp;
 
-namespace CommonUtility;
+namespace Scale;
 
-static class CU
+static class CommonUtility
 {
 
     /// <summary>

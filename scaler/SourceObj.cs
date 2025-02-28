@@ -1,6 +1,6 @@
 using SkiaSharp;
 
-namespace SourceObj;
+namespace Scale;
 
 public abstract class SourceBase
 {
