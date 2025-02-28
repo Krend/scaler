@@ -23,16 +23,6 @@ public abstract class ScaleBase
 
     }
 
-    public virtual void Dispose()
-    {
-        if (DestroyOwnObjects)
-        {
-            sb.Dispose();
-            rb.Dispose();
-        }
-        Console.WriteLine(this.GetType().Name + " Destroy");
-    }
-
     public abstract SKBitmap? ScaleFunc(SKBitmap bmp);
 
     public int Scale()
@@ -55,12 +45,6 @@ public class ScaleTest : ScaleBase
     public ScaleTest(SourceBase sb, ResultBase rb, bool DestroyOwnObjects = true) : base(sb, rb, DestroyOwnObjects)
     {
 
-    }
-
-    public override void Dispose()
-    {
-
-        base.Dispose();
     }
 
     public override SKBitmap? ScaleFunc(SKBitmap bmp)

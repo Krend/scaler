@@ -9,12 +9,6 @@ public abstract class ResultBase
     {
         Console.WriteLine(this.GetType().Name + " Create");
     }
-
-    public virtual void Dispose()
-    {
-        Console.WriteLine(this.GetType().Name + " Destroy");
-    }
-
     public abstract int Save(SKBitmap bmp);
 }
 
@@ -24,12 +18,6 @@ public class ResultTest : ResultBase
     public ResultTest() : base()
     {
 
-    }
-
-    public override void Dispose()
-    {
-
-        base.Dispose();
     }
 
     public override int Save(SKBitmap bmp)
