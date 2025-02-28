@@ -4,55 +4,50 @@ using ResultObj;
 
 namespace ScaleObj;
 
-public abstract class ScaleBase
+public interface IScaleFunc
 {
-    protected SourceBase sb;
-    protected ResultBase rb;
+    public SKBitmap? Scale(SKBitmap bmp);
+}
 
-    protected bool DestroyOwnObjects;
-    public ScaleBase(SourceBase sb, ResultBase rb, bool DestroyOwnObjects = true)
+public class ScaleFuncCopy : IScaleFunc
+{
+    public SKBitmap? Scale(SKBitmap bmp)
+    {
+        SKBitmap resbmp = new SKBitmap();
+        bmp.CopyTo(resbmp);
+        return resbmp;
+    }
+}
+
+public class ScaleBase
+{
+    private readonly SourceBase _sb;
+    private readonly ResultBase _rb;
+    private readonly IScaleFunc _sf;
+    public ScaleBase(SourceBase sb, ResultBase rb, IScaleFunc sf)
     {
         Console.WriteLine(this.GetType().Name + " Create");
 
         ArgumentNullException.ThrowIfNull(sb, "Unassigned Sourcebase");
         ArgumentNullException.ThrowIfNull(rb, "Unassigned ResultBase");
+        ArgumentNullException.ThrowIfNull(sf, "Unassigned ResultBase");
 
-        this.sb = sb;
-        this.rb = rb;
-        this.DestroyOwnObjects = DestroyOwnObjects;
-
+        this._sb = sb;
+        this._rb = rb;
+        this._sf = sf;
     }
-
-    public abstract SKBitmap? ScaleFunc(SKBitmap bmp);
 
     public int Scale()
     {
-        using SKBitmap? bmp = sb.Pass();
+        using SKBitmap? bmp = _sb.Pass();
         if (null == bmp)
             return 0;
 
-        using SKBitmap? bmp2 = ScaleFunc(bmp);
+        using SKBitmap? bmp2 = _sf.Scale(bmp);
         if (null == bmp2)
             return 0;
 
-        return rb.Save(bmp2);        
-    }
-
-}
-
-public class ScaleTest : ScaleBase
-{
-    public ScaleTest(SourceBase sb, ResultBase rb, bool DestroyOwnObjects = true) : base(sb, rb, DestroyOwnObjects)
-    {
-
-    }
-
-    public override SKBitmap? ScaleFunc(SKBitmap bmp)
-    {
-        SKBitmap resbmp = new SKBitmap();
-        bmp.CopyTo(resbmp);
-        return resbmp;
-
+        return _rb.Save(bmp2);
     }
 
 }
